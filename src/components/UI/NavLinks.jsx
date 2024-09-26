@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import links from "../../utils/helper"
+import {links} from "../../utils/helper"
 
 const NavLinks = () => {
   return (
