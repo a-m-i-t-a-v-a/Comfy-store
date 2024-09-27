@@ -5,7 +5,7 @@ import Error from './components/Error'
 import Login from './components/Login'
 import Register from './components/Register'
 import Landing from './components/Landing'
-import Products from './components/Products'
+import Products, { productsLoader } from './components/Products'
 import SingleProduct, { singleProductLoader } from './components/SingleProduct'
 import Cart from './components/Cart'
 import About from './components/About'
@@ -31,7 +31,8 @@ const router=createBrowserRouter([
       },
       {
         path:'products',
-        element:<Products/>
+        element:<Products/>,
+        loader:productsLoader
       },
       {
         path:'products/:id',
