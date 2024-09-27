@@ -6,7 +6,7 @@ import Login from './components/Login'
 import Register from './components/Register'
 import Landing from './components/Landing'
 import Products from './components/Products'
-import SingleProduct from './components/SingleProduct'
+import SingleProduct, { singleProductLoader } from './components/SingleProduct'
 import Cart from './components/Cart'
 import About from './components/About'
 import Checkout from './components/Checkout'
@@ -35,7 +35,8 @@ const router=createBrowserRouter([
       },
       {
         path:'products/:id',
-        element:<SingleProduct/>
+        element:<SingleProduct/>,
+        loader:singleProductLoader
       },
       {
         path:'cart',
