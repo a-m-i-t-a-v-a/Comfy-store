@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { Link, useLoaderData } from "react-router-dom"
 import { customFetch, formatPrice } from "../utils/helper"
 import { useState } from "react"
