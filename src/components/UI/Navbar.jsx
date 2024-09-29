@@ -4,6 +4,7 @@ import { BsCart3, BsMoonFill, BsSunFill } from "react-icons/bs";
 import NavLinks from "./NavLinks";
 import { useEffect, useState } from "react";
 import { themes } from "../../utils/helper";
+import { useSelector } from "react-redux";
 
 const getThemeFromLocalStorage=()=>{
     return localStorage.getItem('theme') || themes.corporate
@@ -21,6 +22,9 @@ const Navbar = () => {
     document.documentElement.setAttribute('data-theme',theme);
     localStorage.setItem('theme',theme)
   },[theme])
+
+  const numItemsInCart=useSelector(state=>Number(state.cart.numItemsInCart) || 0)
+  console.log(Number(numItemsInCart))
 
   return (
     <nav className="bg-base-200 w-full fixed top-12 left-0">
@@ -55,7 +59,9 @@ const Navbar = () => {
             <NavLink to='/cart' className='btn btn-ghost btn-circle btn-md ml-4'>
                 <div className="indicator">
                     <BsCart3 className="h-6 w-6"/>
-                    <span className="badge badge-sm badge-primary indicator-item">5</span>
+                    <span className="badge badge-sm badge-primary indicator-item">
+                      {numItemsInCart}
+                    </span>
                 </div>
             </NavLink>
         </div>
