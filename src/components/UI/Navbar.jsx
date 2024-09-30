@@ -2,29 +2,18 @@ import { NavLink } from "react-router-dom"
 import { FaBarsStaggered } from "react-icons/fa6";
 import { BsCart3, BsMoonFill, BsSunFill } from "react-icons/bs";
 import NavLinks from "./NavLinks";
-import { useEffect, useState } from "react";
-import { themes } from "../../utils/helper";
-import { useSelector } from "react-redux";
-
-const getThemeFromLocalStorage=()=>{
-    return localStorage.getItem('theme') || themes.corporate
-}
+import { useDispatch, useSelector } from "react-redux";
+import { toggleTheme } from "../../features/user/userSlice";
 
 const Navbar = () => {
-  const [theme,setTheme]=useState(getThemeFromLocalStorage());
+
+  const dispatch=useDispatch()
 
   const handleTheme=()=>{
-    const {corporate,luxury}=themes;
-    const newTheme=theme===corporate ? luxury : corporate;
-    setTheme(newTheme)
+    dispatch(toggleTheme())
   }
-  useEffect(()=>{
-    document.documentElement.setAttribute('data-theme',theme);
-    localStorage.setItem('theme',theme)
-  },[theme])
 
   const numItemsInCart=useSelector(state=>Number(state.cart.numItemsInCart) || 0)
-  console.log(Number(numItemsInCart))
 
   return (
     <nav className="bg-base-200 w-full fixed top-12 left-0">
