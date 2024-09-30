@@ -26,11 +26,15 @@ export const checkoutFormAction=(store)=>async({request})=>{
                 Authorization:`Bearer ${user.token}`
             }
         })
+        if(!response.ok){
+            return `SOMEthing went wrong`
+        }
         store.dispatch(clearCart())
         toast.success('Order placed successfully')
         return redirect('/orders')
     }catch(err){
         const errMsg=err?.response?.data?.error?.message || 'error in placing the order'
+        if(err.response.status===401) return redirect('/login')
         toast.error(errMsg)
     }
     return null;
