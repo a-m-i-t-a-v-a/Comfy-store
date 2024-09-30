@@ -9,13 +9,14 @@ import Products, { productsLoader } from './components/Products'
 import SingleProduct, { singleProductLoader } from './components/SingleProduct'
 import Cart from './components/Cart'
 import About from './components/About'
-import Checkout from './components/Checkout'
+import Checkout, { checkoutPageLoader } from './components/Checkout'
 import Orders from './components/Orders'
 import ErrorElement from './components/UI/ErrorElement'
 
 //loaders
 import { loader as landingLoader } from './components/Landing'
 import store from './store'
+import { checkoutFormAction } from './components/UI/CheckoutForm'
 //actions
 
 const router=createBrowserRouter([
@@ -50,7 +51,9 @@ const router=createBrowserRouter([
       },
       {
         path:'checkout',
-        element:<Checkout/>
+        element:<Checkout/>,
+        loader:checkoutPageLoader(store),
+        action:checkoutFormAction(store)
       },
       {
         path:'orders',
