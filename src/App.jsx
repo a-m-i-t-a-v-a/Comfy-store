@@ -10,7 +10,7 @@ import SingleProduct, { singleProductLoader } from './components/SingleProduct'
 import Cart from './components/Cart'
 import About from './components/About'
 import Checkout, { checkoutPageLoader } from './components/Checkout'
-import Orders from './components/Orders'
+import Orders, { orderLoader } from './components/Orders'
 import ErrorElement from './components/UI/ErrorElement'
 
 //loaders
@@ -57,7 +57,8 @@ const router=createBrowserRouter([
       },
       {
         path:'orders',
-        element:<Orders/>
+        element:<Orders/>,
+        loader:orderLoader(store)
       }
     ]
   },

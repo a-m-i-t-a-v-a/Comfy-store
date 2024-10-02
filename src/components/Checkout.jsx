@@ -13,7 +13,6 @@ export const checkoutPageLoader=(store)=>()=>{
       toast.warn('No user')
       return redirect('/login')
     }
-    console.log(user)
   }catch(err){
     console.log(err)
   }

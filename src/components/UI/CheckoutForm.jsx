@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-refresh/only-export-components */
 
 import { Form, redirect } from "react-router-dom";
@@ -26,9 +27,6 @@ export const checkoutFormAction=(store)=>async({request})=>{
                 Authorization:`Bearer ${user.token}`
             }
         })
-        if(!response.ok){
-            return `SOMEthing went wrong`
-        }
         store.dispatch(clearCart())
         toast.success('Order placed successfully')
         return redirect('/orders')
