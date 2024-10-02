@@ -16,8 +16,18 @@ import ErrorElement from './components/UI/ErrorElement'
 //loaders
 import { loader as landingLoader } from './components/Landing'
 import store from './store'
-import { checkoutFormAction } from './components/UI/CheckoutForm'
 //actions
+import { checkoutFormAction } from './components/UI/CheckoutForm'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+
+const queryClient=new QueryClient({
+  defaultOptions:{
+    queries:{
+      staleTime:1000*60*5,
+    }
+  }
+})
 
 const router=createBrowserRouter([
   {
@@ -29,17 +39,17 @@ const router=createBrowserRouter([
         index:true,
         element:<Landing/>,
         errorElement:<ErrorElement/>,
-        loader:landingLoader
+        loader:landingLoader(queryClient)
       },
       {
         path:'products',
         element:<Products/>,
-        loader:productsLoader
+        loader:productsLoader(queryClient)
       },
       {
         path:'products/:id',
         element:<SingleProduct/>,
-        loader:singleProductLoader
+        loader:singleProductLoader(queryClient)
       },
       {
         path:'cart',
@@ -53,12 +63,12 @@ const router=createBrowserRouter([
         path:'checkout',
         element:<Checkout/>,
         loader:checkoutPageLoader(store),
-        action:checkoutFormAction(store)
+        action:checkoutFormAction(store,queryClient)
       },
       {
         path:'orders',
         element:<Orders/>,
-        loader:orderLoader(store)
+        loader:orderLoader(store,queryClient)
       }
     ]
   },
@@ -79,7 +89,10 @@ const router=createBrowserRouter([
 function App() {
 
   return (
-    <RouterProvider router={router}/>
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router}/>
+      <ReactQueryDevtools initialIsOpen={false}/>
+    </QueryClientProvider>
   )
 }
 

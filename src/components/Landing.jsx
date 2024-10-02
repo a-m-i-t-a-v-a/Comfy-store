@@ -5,8 +5,13 @@ import Hero from "./UI/Hero"
 
 const url='/products?featured=true'
 
-export const loader=async()=>{
-  const response =await customFetch.get(url);
+const featuredProductQuery={
+  queryKey:['featuredProducts'],
+  queryFn:()=>customFetch(url)
+}
+
+export const loader=(queryClient)=>async()=>{
+  const response =await queryClient.ensureQueryData(featuredProductQuery)
   const products=response.data.data
   return {products}
 }
